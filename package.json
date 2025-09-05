@@ -13,7 +13,9 @@
     "incremental",
     "parsing",
     "tree-sitter",
-    "bind"
+    "bind",
+    "dns",
+    "zone"
   ],
   "files": [
     "grammar.js",
