@@ -47,7 +47,7 @@ module.exports = grammar({
 
     resource_record: ($) =>
       seq(
-        field("name", choice($.domain_name, "@")),
+        field("name", $.domain_name),
         optional(field("ttl", $.time_value)),
         optional(field("class", $.record_class)),
         field("type", $.record_type),
@@ -55,7 +55,21 @@ module.exports = grammar({
       ),
 
     domain_name: ($) =>
-      /[a-zA-Z0-9_*]([a-zA-Z0-9\-_*]*[a-zA-Z0-9_*])?(\.[a-zA-Z0-9_*]([a-zA-Z0-9\-_*]*[a-zA-Z0-9_*])?)*/,
+      choice(
+        "@",
+        token(
+          prec(
+            -1,
+            /[a-zA-Z_*][a-zA-Z0-9\-_*]*(\.[a-zA-Z0-9_*][a-zA-Z0-9\-_*]*)*\.?/,
+          ),
+        ),
+        token(
+          prec(
+            -1,
+            /[a-zA-Z0-9_*]*[a-zA-Z][a-zA-Z0-9\-_*]*(\.[a-zA-Z0-9_*][a-zA-Z0-9\-_*]*)*\.?/,
+          ),
+        ),
+      ),
 
     time_value: ($) => /\d+[smhdw]?/,
 
@@ -122,50 +136,11 @@ module.exports = grammar({
         seq(
           $.domain_name, // MNAME
           $.domain_name, // RNAME
-          "(",
-          $._newline,
-          optional(
-            seq(
-              /[ \t]+/,
-              $.number,
-              optional(seq(/[ \t]+/, $.comment)),
-              $._newline,
-            ),
-          ), // serial
-          optional(
-            seq(
-              /[ \t]+/,
-              $.time_value,
-              optional(seq(/[ \t]+/, $.comment)),
-              $._newline,
-            ),
-          ), // refresh
-          optional(
-            seq(
-              /[ \t]+/,
-              $.time_value,
-              optional(seq(/[ \t]+/, $.comment)),
-              $._newline,
-            ),
-          ), // retry
-          optional(
-            seq(
-              /[ \t]+/,
-              $.time_value,
-              optional(seq(/[ \t]+/, $.comment)),
-              $._newline,
-            ),
-          ), // expire
-          optional(
-            seq(
-              /[ \t]+/,
-              $.time_value,
-              optional(seq(/[ \t]+/, $.comment)),
-              $._newline,
-            ),
-          ), // minimum
-          /[ \t]*/,
-          ")",
+          $.number, // serial
+          $.time_value, // refresh
+          $.time_value, // retry
+          $.time_value, // expire
+          $.time_value, // minimum
         ),
       ),
 
@@ -196,16 +171,16 @@ module.exports = grammar({
         -1,
         repeat1(
           choice(
-            $.domain_name,
-            $.ipv4_address,
-            $.ipv6_address,
+            prec(2, $.ipv4_address),
+            prec(2, $.ipv6_address),
             $.number,
             $.quoted_string,
+            $.domain_name,
           ),
         ),
       ),
 
-    ipv4_address: ($) => /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/,
+    ipv4_address: ($) => token(/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/),
 
     ipv6_address: ($) => /([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}/,
 

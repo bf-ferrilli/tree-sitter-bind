@@ -23,6 +23,11 @@
     }
   },
   {
+    "type": "domain_name",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "generic_data",
     "named": true,
     "fields": {},
@@ -177,10 +182,6 @@
         "required": true,
         "types": [
           {
-            "type": "@",
-            "named": false
-          },
-          {
             "type": "domain_name",
             "named": true
           }
@@ -216,10 +217,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "comment",
-          "named": true
-        },
         {
           "type": "domain_name",
           "named": true
@@ -318,14 +315,6 @@
   },
   {
     "type": "$TTL",
-    "named": false
-  },
-  {
-    "type": "(",
-    "named": false
-  },
-  {
-    "type": ")",
     "named": false
   },
   {
@@ -544,10 +533,6 @@
     "type": "comment",
     "named": true,
     "extra": true
-  },
-  {
-    "type": "domain_name",
-    "named": true
   },
   {
     "type": "file_path",
