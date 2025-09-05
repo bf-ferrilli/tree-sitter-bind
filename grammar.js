@@ -136,11 +136,20 @@ module.exports = grammar({
         seq(
           $.domain_name, // MNAME
           $.domain_name, // RNAME
+          "(",
+          // Allow any content between parentheses, but only capture the structured data
+          optional(repeat(choice($._newline, /[ \t]+/))),
           $.number, // serial
+          optional(repeat(choice($._newline, /[ \t]+/))),
           $.time_value, // refresh
+          optional(repeat(choice($._newline, /[ \t]+/))),
           $.time_value, // retry
+          optional(repeat(choice($._newline, /[ \t]+/))),
           $.time_value, // expire
+          optional(repeat(choice($._newline, /[ \t]+/))),
           $.time_value, // minimum
+          optional(repeat(choice($._newline, /[ \t]+/))),
+          ")",
         ),
       ),
 

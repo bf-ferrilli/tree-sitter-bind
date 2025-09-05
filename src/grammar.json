@@ -513,24 +513,176 @@
             "name": "domain_name"
           },
           {
+            "type": "STRING",
+            "value": "("
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_newline"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[ \\t]+"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
             "type": "SYMBOL",
             "name": "number"
           },
           {
-            "type": "SYMBOL",
-            "name": "time_value"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_newline"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[ \\t]+"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           },
           {
             "type": "SYMBOL",
             "name": "time_value"
           },
           {
-            "type": "SYMBOL",
-            "name": "time_value"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_newline"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[ \\t]+"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           },
           {
             "type": "SYMBOL",
             "name": "time_value"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_newline"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[ \\t]+"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "time_value"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_newline"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[ \\t]+"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "time_value"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_newline"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[ \\t]+"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "STRING",
+            "value": ")"
           }
         ]
       }
