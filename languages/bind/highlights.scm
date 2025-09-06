@@ -1,59 +1,55 @@
-; Comments
+; Comments - subdued
 (comment) @comment
 
-; Directives
+; Directives - prominent keywords  
 (ttl_directive) @keyword.directive
-(origin_directive) @keyword.directive 
+(origin_directive) @keyword.directive
 (include_directive) @keyword.directive
 
-; Resource record types with categorization
-(record_type "SOA") @type.builtin.zone
-(record_type "NS") @type.builtin.zone
-(record_type "MX") @type.builtin.mail
-(record_type "A") @type.builtin.address
-(record_type "AAAA") @type.builtin.address
-(record_type "CNAME") @type.builtin.alias
-(record_type "PTR") @type.builtin.alias
-(record_type "TXT") @type.builtin.text
-(record_type "SRV") @type.builtin.service
+; Record types - very prominent, colored by category
+(record_type "SOA") @keyword.control
+(record_type "NS") @keyword.control
+(record_type "MX") @type.builtin
+(record_type "A") @type
+(record_type "AAAA") @type
+(record_type "CNAME") @function.builtin
+(record_type "PTR") @function.builtin
+(record_type "TXT") @string.special.symbol
+(record_type "SRV") @variable.builtin
 (record_type) @type.builtin
 
-; Record classes
-(record_class) @constant.builtin
+; Record classes - distinct from types
+(record_class "IN") @constant
+(record_class) @constant
 
-; Domain names with context-aware highlighting
-(resource_record name: (domain_name) @entity.name.function)
+; TTL values - make them stand out from regular numbers
+(resource_record ttl: (time_value) @number.float)
+(ttl_directive (time_value) @number.float)
 
-; Special @ symbol for zone root
-(domain_name "@") @keyword.operator
+; Domain names - context-aware coloring
+(resource_record name: (domain_name) @variable.other.member)
+(domain_name "@") @operator
+(soa_data (domain_name) @string.regexp)
+(mx_data (domain_name) @string.regexp)
+(srv_data (domain_name) @string.regexp)
+(generic_data (domain_name) @string.regexp)
+(domain_name) @variable
 
-; Domain names in record data
-(soa_data (domain_name) @string.special)
-(mx_data (domain_name) @string.special)
-(srv_data (domain_name) @string.special)
-(generic_data (domain_name) @variable.other)
+; IP addresses - network literals
+(ipv4_address) @number.hex
+(ipv6_address) @number.hex
 
-; Other domain names
-(domain_name) @variable.other.member
+; Numbers in different contexts
+(mx_data (number) @number.integer)
+(srv_data (number) @number.integer (number) @number.integer (number) @number.integer)
+(soa_data (number) @number.integer)
+(number) @number
+(time_value) @number
+
+; String content
+(quoted_string) @string
+(txt_data (quoted_string) @string)
+(file_path) @string.special.path
 
 ; Punctuation
 ["(" ")"] @punctuation.bracket
-
-; Numbers with context-specific highlighting
-(mx_data (number) @number.priority)
-(srv_data (number) @number.priority (number) @number.weight (number) @number.port)
-(soa_data (number) @number.serial)
-
-; IP addresses
-(ipv4_address) @string.special.address
-(ipv6_address) @string.special.address
-
-; Time values
-(time_value) @number.time
-
-; Generic numbers
-(number) @number
-
-; Strings
-(quoted_string) @string.quoted.double
-(file_path) @string.special.path
