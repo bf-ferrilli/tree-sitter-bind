@@ -1,34 +1,13 @@
 [package]
-name = "tree-sitter-bind"
-description = "Bind grammar for tree-sitter"
+name = "zed_bind"
 version = "0.1.0"
-authors = ["Brandon Froehlich"]
-license = "MIT"
-readme = "README.md"
-keywords = ["incremental", "parsing", "tree-sitter", "bind"]
-categories = ["parser-implementations", "parsing", "text-editors"]
-repository = "https://github.com/bf-ferrilli/tree-sitter-bind"
 edition = "2021"
-autoexamples = false
-
-build = "bindings/rust/build.rs"
-include = [
-  "bindings/rust/*",
-  "grammar.js",
-  "queries/*",
-  "src/*",
-  "tree-sitter.json",
-  "LICENSE",
-]
+publish = false
+license = "MIT"
 
 [lib]
-path = "bindings/rust/lib.rs"
+path = "src/bind.rs"
+crate-type = ["cdylib"]
 
 [dependencies]
-tree-sitter-language = "0.1"
-
-[build-dependencies]
-cc = "1.2"
-
-[dev-dependencies]
-tree-sitter = "0.25.8"
+zed_extension_api = "0.6.0"
