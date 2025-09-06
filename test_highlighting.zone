@@ -1,0 +1,23 @@
+; Test file for highlighting
+$TTL 3600
+@       IN      SOA     ns1.example.com. admin.example.com. (
+                        2023010101      ; serial
+                        3600            ; refresh  
+                        1800            ; retry
+                        604800          ; expire
+                        86400 )         ; minimum
+
+@       IN      NS      ns1.example.com.
+@       IN      NS      ns2.example.com.
+
+www     IN      A       192.168.1.100
+mail    IN      A       192.168.1.200
+
+; CNAME record - this should highlight differently
+ftp     300     IN      CNAME   www.example.com.
+
+; MX record with priority
+@       IN      MX      10 mail.example.com.
+
+; SRV record with priority, weight, port
+_http._tcp  IN  SRV  10 20 80 www.example.com.

@@ -8,4 +8,4 @@ repository = "https://github.com/bf-ferrilli/tree-sitter-bind"
 
 [grammars.bind]
 repository = "https://github.com/bf-ferrilli/tree-sitter-bind"
-rev = "83eadd139ed00f0b5da2ffa3b1effc1f88d518e7"
+rev = "4ea71977356bdee134f72bc797cf947596eb92c2"
