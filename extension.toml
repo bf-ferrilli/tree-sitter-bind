@@ -1,6 +1,6 @@
 id = "bind"
-name = "Bind"
-description = "Bind DNS configuration language support"
+name = "BIND"
+description = "BIND DNS configuration language support"
 version = "0.1.0"
 schema_version = 1
 authors = ["Brandon Froehlich <bfroehlich@ferrilli.com>"]

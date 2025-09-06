@@ -6,54 +6,59 @@
 
 ; Resource record fields with proper context-based highlighting
 (resource_record
-  name: (domain_name) @variable.parameter
-  ttl: (time_value) @number.time
+  name: (domain_name) @entity.name.tag
+  ttl: (time_value) @constant.numeric.time
   class: (record_class) @constant.builtin
   type: (record_type) @type.builtin
   data: (_) @string.special)
 
-; Directive time values (different from record TTL)
+; Directive time values (different from record TTL)  
 (ttl_directive
-  (time_value) @number.time)
+  (time_value) @constant.numeric.time)
 
 ; Record types and classes (when not in field context)
 (record_type) @type.builtin
 (record_class) @constant.builtin
 
+; Domain names in different contexts
+; Record names (left side) - entity names
+(resource_record name: (domain_name) @entity.name.tag)
+; Domain names in data (right side) - strings
+(domain_name) @variable.other
+
 ; Special domain references
-(domain_name) @variable
-(domain_name "@") @variable.special
+(domain_name "@") @constant.builtin.special
 
 ; Special symbols and punctuation
 ["@" "(" ")"] @punctuation.special
 
-; Numbers in different contexts
+; Numbers in different contexts - using different highlight categories
 (mx_data
-  (number) @number.priority
-  (domain_name) @string.special)
+  (number) @variable.parameter.priority
+  (domain_name) @string.other.target)
 
 (srv_data
-  (number) @number.priority
-  (number) @number.weight  
-  (number) @number.port
-  (domain_name) @string.special)
+  (number) @variable.parameter.priority
+  (number) @variable.parameter.weight  
+  (number) @variable.parameter.port
+  (domain_name) @string.other.target)
 
 (soa_data
-  (domain_name) @string.special
-  (domain_name) @string.special
-  (number) @number.serial
-  (time_value) @number.time
-  (time_value) @number.time
-  (time_value) @number.time
-  (time_value) @number.time)
+  (domain_name) @string.other.server
+  (domain_name) @string.other.email
+  (number) @constant.numeric.serial
+  (time_value) @constant.numeric.time
+  (time_value) @constant.numeric.time
+  (time_value) @constant.numeric.time
+  (time_value) @constant.numeric.time)
 
-; IP addresses get special treatment
-(ipv4_address) @constant.numeric
-(ipv6_address) @constant.numeric
+; IP addresses get special treatment - more distinct
+(ipv4_address) @constant.numeric.address
+(ipv6_address) @constant.numeric.address
 
 ; Generic numbers and time values (fallback)
 (number) @number
-(time_value) @number.time
+(time_value) @constant.numeric.time
 
 ; Strings and paths
 (quoted_string) @string
@@ -63,10 +68,10 @@
 (txt_data
   (quoted_string) @string)
 
-; Generic data fallback
+; Generic data fallback with more specific targeting
 (generic_data
-  (domain_name) @string.special
-  (ipv4_address) @constant.numeric
-  (ipv6_address) @constant.numeric
+  (domain_name) @string.other.target
+  (ipv4_address) @constant.numeric.address
+  (ipv6_address) @constant.numeric.address
   (number) @number
   (quoted_string) @string)
