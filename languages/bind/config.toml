@@ -1,5 +1,5 @@
 name = "Bind"
 grammar = "bind"
-path_suffixes = ["bind", "conf", "named.conf"]
-line_comments = ["//", "#"]
+path_suffixes = ["bind", "conf", "named.conf", "zone", "db"]
+line_comments = [";", "//", "#"]
 tab_size = 4
