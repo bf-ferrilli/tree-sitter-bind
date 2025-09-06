@@ -1,11 +1,11 @@
 id = "bind"
 name = "BIND"
 description = "BIND DNS configuration language support"
-version = "0.1.0"
+version = "0.2.0"
 schema_version = 1
 authors = ["Brandon Froehlich <bfroehlich@ferrilli.com>"]
 repository = "https://github.com/bf-ferrilli/tree-sitter-bind"
 
 [grammars.bind]
 repository = "https://github.com/bf-ferrilli/tree-sitter-bind"
-rev = "2fc8f6ec952030bd4cd446b030ba41545d34a9ee"
+rev = "a98a9f02f8538a9ba22c3bf79c4154f2e2899591"
