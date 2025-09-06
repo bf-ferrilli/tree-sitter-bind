@@ -1,0 +1,4 @@
+name = "Bind"
+grammar = "bind"
+path_suffixes = ["bind", "conf"]
+line_comment_token = "//"
