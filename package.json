@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-bind",
-  "version": "0.1.0",
+  "version": "0.4.0",
   "description": "Bind grammar for tree-sitter",
   "repository": "https://github.com/bf-ferrilli/tree-sitter-bind",
   "license": "MIT",
