@@ -2,77 +2,58 @@
 (comment) @comment
 
 ; Directives
-["" "" ""] @keyword.directive
+(ttl_directive) @keyword.directive
+(origin_directive) @keyword.directive 
+(include_directive) @keyword.directive
 
-; Resource record fields with MUCH more distinct highlighting
-(resource_record
-  name: (domain_name) @entity.name.function
-  ttl: (time_value) @markup.italic
-  class: (record_class) @constant.builtin
-  type: (record_type) @type.builtin
-  data: (_) @string.special)
-
-; Directive time values - make them stand out more
-(ttl_directive
-  (time_value) @markup.bold)
-
-; Record types and classes
+; Resource record types with categorization
+(record_type "SOA") @type.builtin.zone
+(record_type "NS") @type.builtin.zone
+(record_type "MX") @type.builtin.mail
+(record_type "A") @type.builtin.address
+(record_type "AAAA") @type.builtin.address
+(record_type "CNAME") @type.builtin.alias
+(record_type "PTR") @type.builtin.alias
+(record_type "TXT") @type.builtin.text
+(record_type "SRV") @type.builtin.service
 (record_type) @type.builtin
+
+; Record classes
 (record_class) @constant.builtin
 
-; Domain names with MUCH better differentiation
-; Record names (left column) - make them standout entities
+; Domain names with context-aware highlighting
 (resource_record name: (domain_name) @entity.name.function)
 
-; Special @ symbol
+; Special @ symbol for zone root
 (domain_name "@") @keyword.operator
 
-; Domain names in record data - target destinations
-(mx_data (domain_name) @string.regexp)
-(srv_data (domain_name) @string.regexp)
-(soa_data (domain_name) @string.regexp (domain_name) @string.regexp)
-(generic_data (domain_name) @string.regexp)
+; Domain names in record data
+(soa_data (domain_name) @string.special)
+(mx_data (domain_name) @string.special)
+(srv_data (domain_name) @string.special)
+(generic_data (domain_name) @variable.other)
 
-; All other domain names fallback
+; Other domain names
 (domain_name) @variable.other.member
 
 ; Punctuation
-["@" "(" ")"] @punctuation.special
+["(" ")"] @punctuation.bracket
 
-; Numbers with AGGRESSIVE differentiation by context
-; MX priorities - make them pop
-(mx_data
-  (number) @markup.underline.priority)
+; Numbers with context-specific highlighting
+(mx_data (number) @number.priority)
+(srv_data (number) @number.priority (number) @number.weight (number) @number.port)
+(soa_data (number) @number.serial)
 
-; SRV numbers - each gets different treatment  
-(srv_data
-  (number) @markup.underline.priority
-  (number) @variable.parameter.weight
-  (number) @constant.character.port)
+; IP addresses
+(ipv4_address) @string.special.address
+(ipv6_address) @string.special.address
 
-; SOA numbers - serial vs times
-(soa_data
-  (number) @constant.numeric.hex
-  (time_value) @markup.italic
-  (time_value) @markup.italic
-  (time_value) @markup.italic
-  (time_value) @markup.italic)
+; Time values
+(time_value) @number.time
 
-; IP addresses - make them REALLY stand out
-(ipv4_address) @string.escape
-(ipv6_address) @string.escape
-
-; TTL values in records - different from directive TTL
-(resource_record ttl: (time_value) @markup.italic)
-
-; Generic fallbacks
+; Generic numbers
 (number) @number
-(time_value) @markup.italic
 
 ; Strings
-(quoted_string) @string
+(quoted_string) @string.quoted.double
 (file_path) @string.special.path
-
-; TXT record content - make quoted strings more obvious
-(txt_data
-  (quoted_string) @string.quoted.double)
