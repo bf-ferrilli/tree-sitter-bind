@@ -59,14 +59,9 @@ module.exports = grammar({
         "@",
         token(
           prec(
-            -1,
-            /[a-zA-Z_*][a-zA-Z0-9\-_*]*(\.[a-zA-Z0-9_*][a-zA-Z0-9\-_*]*)*\.?/,
-          ),
-        ),
-        token(
-          prec(
-            -1,
-            /[a-zA-Z0-9_*]*[a-zA-Z][a-zA-Z0-9\-_*]*(\.[a-zA-Z0-9_*][a-zA-Z0-9\-_*]*)*\.?/,
+            2, // Higher precedence than number to avoid splitting
+            // Domain names can start with digits but must contain letters or dots
+            /[a-zA-Z0-9_*][a-zA-Z0-9\-_*]*(\.[a-zA-Z0-9_*][a-zA-Z0-9\-_*]*)*\.?/,
           ),
         ),
       ),
@@ -189,7 +184,7 @@ module.exports = grammar({
         ),
       ),
 
-    ipv4_address: ($) => token(/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/),
+    ipv4_address: ($) => token(prec(3, /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/)),
 
     ipv6_address: ($) => /([0-9a-fA-F]{0,4}:){2,7}[0-9a-fA-F]{0,4}/,
 
