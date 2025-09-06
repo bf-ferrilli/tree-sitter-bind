@@ -4,7 +4,7 @@
 [![discord][discord]](https://discord.gg/w7nTvsVJhm)
 [![matrix][matrix]](https://matrix.to/#/#tree-sitter-chat:matrix.org)
 
-A Tree-sitter parser for BIND DNS configuration files and zone files.
+BIND DNS grammar for tree-sitter.
 
 ## Supported File Types
 
@@ -30,7 +30,7 @@ This parser is available as a Zed extension. Files with supported extensions wil
 
 ### Other Editors
 
-For editors supporting Tree-sitter grammars:
+For editors supporting tree-sitter grammars:
 
 ```bash
 git clone https://github.com/bf-ferrilli/tree-sitter-bind
